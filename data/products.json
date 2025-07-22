@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Producto 1",
+    "description": "Descripción del producto 1",
+    "code": "abc123",
+    "price": 100,
+    "status": true,
+    "stock": 50,
+    "category": "categoría A",
+    "thumbnails": [
+      "ruta1.jpg",
+      "ruta2.jpg"
+    ]
+  }
+]
