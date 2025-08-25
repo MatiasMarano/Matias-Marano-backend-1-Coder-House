@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-export class ProductManager {
+export default class ProductManager {
   constructor() {
     this.path = path.resolve('data/products.json');
   }
@@ -55,4 +55,5 @@ export class ProductManager {
     products = products.filter(p => p.id !== Number(id));
     await this.saveProducts(products);
   }
+  
 }
