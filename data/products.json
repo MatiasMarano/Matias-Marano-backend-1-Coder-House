@@ -1,16 +1,5 @@
 [
   {
-    "id": 2,
-    "title": "Remera Ferrari Leclerc",
-    "description": "Remera Ferrari \"Leclerc\", con numero 16",
-    "code": "1",
-    "price": 100,
-    "stock": 1000,
-    "category": "1",
-    "status": true,
-    "thumbnails": []
-  },
-  {
     "id": 3,
     "title": "Casco Senna",
     "description": "Casco replica de Arton Senna",
@@ -18,6 +7,17 @@
     "price": 5000,
     "stock": 100,
     "category": "A",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "id": 4,
+    "title": "Remera Ferrari Leclerc",
+    "description": "Remera Ferrari \"Leclerc 16\"",
+    "code": "1",
+    "price": 100,
+    "stock": 1000,
+    "category": "C",
     "status": true,
     "thumbnails": []
   }

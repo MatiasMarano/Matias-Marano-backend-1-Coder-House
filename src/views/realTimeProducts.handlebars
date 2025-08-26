@@ -1,7 +1,13 @@
-<!-- views/realTimeProducts.handlebars -->
-<h1>Productos en tiempo real</h1>
+<h1>{{title}}</h1>
 
-<ul id="productList"></ul>
+<ul id="productList">
+  {{#each products}}
+    <li data-id="{{this.id}}">
+      {{this.title}} - ${{this.price}}
+      <button class="deleteBtn">Eliminar</button>
+    </li>
+  {{/each}}
+</ul>
 
 <h2>Agregar producto</h2>
 <form id="productForm">

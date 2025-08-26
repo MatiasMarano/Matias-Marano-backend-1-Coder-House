@@ -1,25 +1,22 @@
-// public/js/realtime.js
 const socket = io();
 
-// Renderizar productos en la lista
+// productos en la lista
 socket.on("updateProducts", (products) => {
   const productList = document.getElementById("productList");
-  productList.innerHTML = "";
+  productList.innerHTML = products.map(p => `
+    <li data-id="${p.id}">
+      ${p.title} - $${p.price}
+      <button class="deleteBtn">Eliminar</button>
+    </li>
+  `).join("");
+});
 
-  products.forEach((p) => {
-    const li = document.createElement("li");
-    li.textContent = `${p.title} - $${p.price}`;
-
-    // Boton eliminar
-    const btn = document.createElement("button");
-    btn.textContent = "Eliminar";
-    btn.addEventListener("click", () => {
-      socket.emit("deleteProduct", p.id);
-    }); 
-
-    li.appendChild(btn);
-    productList.appendChild(li);
-  });
+// eliminar
+document.getElementById("productList").addEventListener("click", (e) => {
+  if (e.target.classList.contains("deleteBtn")) {
+    const id = e.target.closest("li").dataset.id;
+    socket.emit("deleteProduct", Number(id));
+  }
 });
 
 // Captura del formulario
