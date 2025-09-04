@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>{{title}}</title>
-  <link rel="stylesheet" href="/css/styles.css"> <!-- si tenés CSS -->
-  <script src="/socket.io/socket.io.js"></script> <!-- para websockets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 24px auto; padding: 0 12px; }
+    header a { margin-right: 12px; }
+    ul { padding-left: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .pagination a { margin-right: 8px; }
+    button { cursor: pointer; }
+  </style>
 </head>
 <body>
-  {{{body}}} <!-- Aquí se inyectan las vistas como home o realTimeProducts -->
+  <header>
+    <a href="/products">Productos</a>
+  </header>
+  {{{body}}}
 </body>
 </html>

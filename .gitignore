@@ -15,3 +15,5 @@ Thumbs.db
 
 # Otros posibles
 *.log
+
+.env

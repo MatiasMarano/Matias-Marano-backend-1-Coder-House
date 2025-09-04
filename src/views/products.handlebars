@@ -1,0 +1,44 @@
+<h1>Productos</h1>
+
+<div class="grid">
+  {{#each products}}
+    <div class="card">
+      <h3><a href="/products/{{this._id}}">{{this.title}}</a></h3>
+      <div class="row">
+        <span><b>Precio:</b> ${{this.price}}</span>
+        <span><b>Stock:</b> {{this.stock}}</span>
+      </div>
+      <div class="row">
+        <small>Categoría: {{this.category}} | {{#if this.status}}Disponible{{else}}No disponible{{/if}}</small>
+      </div>
+      <div class="row">
+        <input type="text" placeholder="CartId" id="cart-{{this._id}}" />
+        <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+<div class="pagination" style="margin-top: 16px;">
+  {{#if hasPrevPage}}<a href="{{prevLink}}">⟵ Anterior</a>{{/if}}
+  <span>Página {{page}} de {{totalPages}}</span>
+  {{#if hasNextPage}}<a href="{{nextLink}}">Siguiente ⟶</a>{{/if}}
+</div>
+
+<script>
+async function addToCart(pid) {
+  const input = document.getElementById('cart-' + pid);
+  const cid = input.value.trim();
+  if (!cid) {
+    alert('Ingresá un CartId (podés crear uno con POST /api/carts y pegar el _id)');
+    return;
+  }
+  const res = await fetch(`/api/carts/${cid}/product/${pid}`, { method: 'POST' });
+  const data = await res.json();
+  if (data.status === 'success') {
+    alert('Producto agregado. Ver carrito en /carts/' + cid);
+  } else {
+    alert('Error: ' + (data.error || 'desconocido'));
+  }
+}
+</script>
