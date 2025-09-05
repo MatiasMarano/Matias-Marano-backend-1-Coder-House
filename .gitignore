@@ -1,7 +1,7 @@
 # node_modules no se sube al repo
 node_modules/
 
-# Archivos de entorno (por si después tenés un .env)
+# Archivos de entorno 
 .env
 
 # Archivos de log

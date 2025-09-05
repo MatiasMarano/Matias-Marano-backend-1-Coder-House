@@ -3,6 +3,7 @@ import { engine } from 'express-handlebars';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import methodOverride from 'method-override';
 
 import productsRouter from './router/products.router.js';
 import cartsRouter from './router/carts.router.js';
@@ -20,9 +21,17 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
-// Handlebars
-app.engine('handlebars', engine());
+// Handlebars con helpers
+app.engine('handlebars', engine({
+  helpers: {
+    multiply: (a, b) => a * b,
+    add: (a, b) => a + b,
+    // Podés agregar más helpers según lo que uses en tus vistas
+  }
+}));
+
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
