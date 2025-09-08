@@ -1,5 +1,4 @@
 <h1>Carrito</h1>
-
 <ul>
   {{#each products}}
   <li>
@@ -13,15 +12,13 @@
       <button type="submit">Actualizar cantidad</button>
     </form>
 
-    <form action="/api/carts/{{../_id}}/products/{{this.product._id}}" method="post">
-      <input type="hidden" name="_method" value="DELETE">
+    <form action="/api/carts/{{../_id}}/products/{{this.product._id}}?_method=DELETE" method="post">
       <button type="submit">Eliminar producto</button>
     </form>
   </li>
   {{/each}}
 </ul>
 
-<form action="/api/carts/{{_id}}" method="post">
-  <input type="hidden" name="_method" value="DELETE">
+<form action="/api/carts/{{_id}}?_method=DELETE" method="post">
   <button type="submit">Vaciar carrito</button>
 </form>

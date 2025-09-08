@@ -28,14 +28,12 @@ app.engine('handlebars', engine({
   helpers: {
     multiply: (a, b) => a * b,
     add: (a, b) => a + b,
-    // Podés agregar más helpers según lo que uses en tus vistas
   }
 }));
-
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-// Routers (API y vistas)
+// Routers
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);
@@ -45,5 +43,5 @@ const PORT = process.env.PORT || 8080;
 await connectDB(process.env.MONGODB_URI);
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
+  console.log(`Servidor escuchando en puerto ${PORT}`);
 });
