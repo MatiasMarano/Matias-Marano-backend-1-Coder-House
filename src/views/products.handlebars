@@ -1,16 +1,12 @@
 <h1>Productos</h1>
-<ul>
+<div class="grid">
   {{#each products}}
-  <li>
-    <h3>{{this.title}}</h3>
-    <p>Precio: ${{this.price}}</p>
-    <p>Categoría: {{this.category}}</p>
-    <p>Stock: {{this.stock}}</p>
-
-    <form action="/api/carts/{{../cartId}}/product/{{this._id}}" method="post">
-      <button type="submit">Agregar al carrito</button>
-    </form>
-    <a href="/products/{{this._id}}">Ver detalles</a>
-  </li>
+    <div class="card">
+      <h3>{{this.title}}</h3>
+      <p>Precio: ${{this.price}}</p>
+      <form action="/carts/{{cartId}}/product/{{this._id}}" method="post">
+        <button type="submit">Agregar al carrito</button>
+      </form>
+    </div>
   {{/each}}
-</ul>
+</div>

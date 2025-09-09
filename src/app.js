@@ -5,8 +5,10 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import methodOverride from 'method-override';
 
-import productsRouter from './router/products.router.js';
-import cartsRouter from './router/carts.router.js';
+import productsRouter from './router/products.router.js';       // FRONT
+import cartsRouter from './router/carts.router.js';             // FRONT
+import cartsApiRouter from './router/carts.api.router.js';      // POSTMAN
+import productsApiRouter from './router/products.api.router.js';
 import viewsRouter from './router/views.router.js';
 import { connectDB } from './config/db.js';
 
@@ -23,25 +25,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-// Handlebars con helpers
+// Handlebars
 app.engine('handlebars', engine({
-  helpers: {
-    multiply: (a, b) => a * b,
-    add: (a, b) => a + b,
-  }
+  helpers: { multiply: (a, b) => a * b, add: (a, b) => a + b }
 }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 // Routers
-app.use('/api/products', productsRouter);
-app.use('/api/carts', cartsRouter);
+app.use('/api/products', productsApiRouter); // POSTMAN
+app.use('/api/carts', cartsApiRouter);       // POSTMAN JSON
+
+app.use('/products', productsRouter);        // FRONT
+app.use('/carts', cartsRouter);              // FRONT
 app.use('/', viewsRouter);
 
 // DB + Server
 const PORT = process.env.PORT || 8080;
 await connectDB(process.env.MONGODB_URI);
 
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en puerto ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Servidor escuchando en puerto ${PORT}`));
