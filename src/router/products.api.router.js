@@ -3,7 +3,7 @@ import { ProductModel } from '../models/product.model.js';
 
 const router = Router();
 
-// Listar productos 
+// Listar productos con filtros, paginación y ordenamiento
 router.get('/', async (req, res) => {
   try {
     const { limit = 10, page = 1, sort, query } = req.query;
@@ -20,7 +20,13 @@ router.get('/', async (req, res) => {
     if (sort === 'asc') sortOpt.price = 1;
     if (sort === 'desc') sortOpt.price = -1;
 
-    const options = { limit: Number(limit), page: Number(page), sort: Object.keys(sortOpt).length ? sortOpt : undefined, lean: true };
+    const options = {
+      limit: Number(limit),
+      page: Number(page),
+      sort: Object.keys(sortOpt).length ? sortOpt : undefined,
+      lean: true
+    };
+
     const result = await ProductModel.paginate(filter, options);
 
     res.json({
@@ -32,6 +38,8 @@ router.get('/', async (req, res) => {
       page: result.page,
       hasPrevPage: result.hasPrevPage,
       hasNextPage: result.hasNextPage,
+      prevLink: result.hasPrevPage ? `/api/products?page=${result.prevPage}&limit=${limit}` : null,
+      nextLink: result.hasNextPage ? `/api/products?page=${result.nextPage}&limit=${limit}` : null
     });
   } catch (err) {
     console.error(err);
