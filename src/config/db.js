@@ -6,7 +6,7 @@ export async function connectDB(uri) {
     await mongoose.connect(uri, { dbName: process.env.MONGODB_DB || 'coder' });
     console.log('--- MongoDB conectado ---');
   } catch (err) {
-    console.error('---Error conectando a MongoDB:', err.message);
+    console.error('---Error conectando a MongoDB: ', err.message);
     process.exit(1);
   }
 }

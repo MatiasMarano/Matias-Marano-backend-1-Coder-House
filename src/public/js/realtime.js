@@ -19,7 +19,7 @@ document.getElementById("productList").addEventListener("click", (e) => {
   }
 });
 
-// Captura del formulario
+// captura del formulario
 const form = document.getElementById("productForm");
 form.addEventListener("submit", (e) => {
   e.preventDefault();

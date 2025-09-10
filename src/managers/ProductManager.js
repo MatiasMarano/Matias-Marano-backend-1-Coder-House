@@ -22,7 +22,7 @@ export default class ProductManager {
   async addProduct(product) {
     const products = await this.getProducts();
 
-    // Generar id automáticamente
+    // Genera id automáticamente
     const newId = products.length ? products[products.length - 1].id + 1 : 1;
 
     const newProduct = { id: newId, ...product };

@@ -1,7 +1,10 @@
 <h1>{{product.title}}</h1>
-<p>{{product.description}}</p>
-<p><b>Precio:</b> ${{product.price}}</p>
-<p><b>Categoría:</b> {{product.category}}</p>
-<p><b>Stock:</b> {{product.stock}}</p>
-<p><b>Estado:</b> {{#if product.status}}Disponible{{else}}No disponible{{/if}}</p>
-<a href="/products">⟵ Volver</a>
+<p>Precio: ${{product.price}}</p>
+<p>Categoría: {{product.category}}</p>
+<p>Descripción: {{product.description}}</p>
+
+<form action="/carts/{{cartId}}/product/{{product._id}}" method="post">
+  <button type="submit">Agregar al carrito</button>
+</form>
+
+<a href="/products">Volver a productos</a>
