@@ -4,7 +4,7 @@
     <div class="card">
       <h3>{{this.title}}</h3>
       <p>Precio: ${{this.price}}</p>
-      <form action="/carts/{{cartId}}/product/{{this._id}}" method="post">
+      <form action="/carts/{{../cartId}}/product/{{this._id}}" method="post">
         <button type="submit">Agregar al carrito</button>
       </form>
     </div>

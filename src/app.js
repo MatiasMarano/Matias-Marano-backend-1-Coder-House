@@ -5,11 +5,10 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import methodOverride from 'method-override';
 
-import productsRouter from './router/products.router.js';       // FRONT
 import cartsRouter from './router/carts.router.js';             // FRONT
 import cartsApiRouter from './router/carts.api.router.js';      // POSTMAN
-import productsApiRouter from './router/products.api.router.js';
-import viewsRouter from './router/views.router.js';
+import productsApiRouter from './router/products.api.router.js';// POSTMAN
+import viewsRouter from './router/views.router.js';             // FRONT
 import { connectDB } from './config/db.js';
 
 dotenv.config();
@@ -36,9 +35,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/api/products', productsApiRouter); // POSTMAN
 app.use('/api/carts', cartsApiRouter);       // POSTMAN JSON
 
-app.use('/products', productsRouter);        // FRONT
-app.use('/carts', cartsRouter);              // FRONT
-app.use('/', viewsRouter);
+app.use('/carts', cartsRouter);              // FRONT carritos
+app.use('/', viewsRouter);                   // FRONT productos + vistas
 
 // DB + Server
 const PORT = process.env.PORT || 8080;
