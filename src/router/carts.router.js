@@ -22,9 +22,17 @@ router.post('/:cid/products/:pid', async (req, res) => {
   if (!product) return res.status(404).send('Producto no encontrado');
 
   const index = cart.products.findIndex(p => p.product.toString() === pid);
+
   if (index >= 0) {
+    // 🚨 Validar stock
+    if (cart.products[index].quantity + 1 > product.stock) {
+      return res.status(400).send(`Stock insuficiente. Máximo disponible: ${product.stock}`);
+    }
     cart.products[index].quantity += 1;
   } else {
+    if (product.stock < 1) {
+      return res.status(400).send('Producto sin stock');
+    }
     cart.products.push({ product: pid, quantity: 1 });
   }
 
@@ -40,8 +48,16 @@ router.put('/:cid/products/:pid', async (req, res) => {
   const cart = await CartModel.findById(cid);
   if (!cart) return res.status(404).send('Carrito no encontrado');
 
+  const product = await ProductModel.findById(pid);
+  if (!product) return res.status(404).send('Producto no encontrado');
+
   const index = cart.products.findIndex(p => p.product.toString() === pid);
   if (index < 0) return res.status(404).send('Producto no está en el carrito');
+
+  // 🚨 Validar stock
+  if (Number(quantity) > product.stock) {
+    return res.status(400).send(`Stock insuficiente. Máximo disponible: ${product.stock}`);
+  }
 
   cart.products[index].quantity = Number(quantity);
   await cart.save();

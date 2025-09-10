@@ -57,4 +57,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Vista detalle de un producto
+router.get('/:pid', async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.pid).lean();
+    if (!product) return res.status(404).send('Producto no encontrado');
+
+    const cart = await getOrCreateCart();
+
+    res.render('productDetail', {
+      product,
+      cartId: cart._id.toString()
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error al cargar detalle de producto');
+  }
+});
+
+
 export default router;

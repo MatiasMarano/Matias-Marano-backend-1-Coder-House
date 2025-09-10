@@ -4,9 +4,14 @@
     <div class="card">
       <h3>{{this.title}}</h3>
       <p>Precio: ${{this.price}}</p>
+
+      <!-- Botón para agregar directo al carrito -->
       <form action="/carts/{{../cartId}}/products/{{this._id}}" method="post">
         <button type="submit">Agregar al carrito</button>
       </form>
+
+      <!-- Link para ver detalle -->
+      <a href="/products/{{this._id}}">Ver detalle</a>
     </div>
   {{/each}}
 </div>
